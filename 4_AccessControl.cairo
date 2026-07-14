@@ -30,13 +30,13 @@
   #[abi(embed_v0)]
   impl MessageModifier of super::IMessenger<ContractState> {
        fn set_message (ref self: ContractState, input_message: ByteArray)   {
-          let caller = get_caller_address()                                                           // Owner check Access Control
+          let caller = get_caller_address();                                                           // Owner check Access Control
           let owner = self.owner.read()
           assert(owner == caller, 'Not Owner')
             
           self.message.write(input_message.clone());
           self.emit(Event::MessageUpdated(MessageUpdated {
-                   owner : get_caller_address(),
+                   owner : caller,
                    new_message : input_message,
           }));
        }       
