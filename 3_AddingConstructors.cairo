@@ -26,7 +26,7 @@
   }
 
   #[constructor]
-  fn constructor(ref self: @ContractState) {                                //Learnt to Add constructors, in this case the deployer becomes the owner.
+  fn constructor(ref self: ContractState) {                                //Learnt to Add constructors, in this case the deployer becomes the owner.
      self.owner.write(get_caller_address());
   }
        
