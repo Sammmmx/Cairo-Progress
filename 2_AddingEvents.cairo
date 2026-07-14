@@ -14,13 +14,13 @@
   #[event]
   #[derive(Drop, starknet::Event)]
   enum Event {
-                MessageUpdated : MessageUpdated,
-  }
+                MessageUpdated : MessageUpdated,                                     // New Event for when a new message is set.
+  }                                                                                  
 
   #[derive(Drop, starknet::Event)]
   struct MessageUpdated {
                  #[key]
-                 owner : ContractAddress,
+                 owner : ContractAddress,                                            // Records owner and the new message
                  new_message : ByteArray,
   }
        
