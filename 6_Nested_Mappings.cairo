@@ -73,6 +73,8 @@ mod Messenger {
         }
 
         fn approve(ref self: ContractState, permit: ContractAddress, amount: u256) {                        // Allowing an address to transfer funds
+            assert (amount > 0, 'Zero Value');
+     
             self.allowances.entry(get_caller_address()).entry(permit).write(amount);                        // The caller can only checks its own allowances supporting privacy
         }
 
