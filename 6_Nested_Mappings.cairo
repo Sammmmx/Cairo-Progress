@@ -6,7 +6,7 @@ trait IMessenger<TContractState> {
     fn deposit(ref self: TContractState, amount: u256);                                                
     fn get_balance(self: @TContractState) -> u256;  
     fn approve(ref self: TContractState, permit: ContractAddress, amount: u256);                          // New Function to approve transfer to a specific address
-    fn get_allowance(self : @TContractState, permitted: ContractAddress) -> u256;                                                     // New Function to read the approved balance to an address by the caller
+    fn get_allowance(self : @TContractState, permitted: ContractAddress) -> u256;                         // New Function to read the approved balance to an address by the caller
 }
 
 #[starknet::contract]
@@ -72,11 +72,11 @@ mod Messenger {
             self.balances.entry(get_caller_address()).read()
         }
 
-        fn approve(ref self: ContractState, permit: ContractAddress, amount: u256) {                                 // Allowing an address to transfer funds
-            self.allowances.entry(get_caller_address()).entry(permit).write(amount);
+        fn approve(ref self: ContractState, permit: ContractAddress, amount: u256) {                        // Allowing an address to transfer funds
+            self.allowances.entry(get_caller_address()).entry(permit).write(amount);                        // The caller can only checks its own allowances supporting privacy
         }
 
-        fn get_allowance(self: @ContractState, permitted: ContractAddress) -> u256 {                               // Reading the allowed funds for transfer to an address
+        fn get_allowance(self: @ContractState, permitted: ContractAddress) -> u256 {                        // Reading the allowed funds for transfer to an address
             self.allowances.entry(get_caller_address()).entry(permitted).read()
         }
     }
