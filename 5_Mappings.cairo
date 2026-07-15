@@ -57,7 +57,10 @@ mod Messenger {
         }
 
         fn deposit(ref self: ContractState, amount: u256) {                                                       // Writing to balances in deposit function
-            self.balances.entry(get_caller_address()).write(amount);   
+            let caller = get_caller_address();     
+            let old = self.balances.entry(caller).read();
+            let new_balance = old + amount;
+            self.balances.entry(caller).write(new_balance);   
         }
 
         fn get_balance(self: @ContractState) -> u256 {                                                          // Reading from balances
