@@ -132,11 +132,10 @@ mod Messenger {
             self.auctionState.write(AuctionState::Active(end_time));
         }
 
-        fn get_auction_status(self: @ContractState) -> felt252 {                                     // New Function to read auctionState values
+        fn get_auction_status(self: @ContractState) -> u64 {                                     // New Function to read auctionState values
             match self.auction_state.read() {
-                  AuctionState::NotStarted => 'Not started',
                   AuctionState::Active(_) => 'Auction is live',
-                  AuctionState::Ended(_) => 'Auction ended',
+                  _ => 0,
             }
         }
     }
