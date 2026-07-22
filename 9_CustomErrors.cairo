@@ -147,14 +147,14 @@ mod Messenger {
             self.whitelist.at(index).read()
         }
 
-        fn set_status (ref self: ContractState, end_time: u64) {        // New Function to write Active and Ended enum values
+        fn set_status (ref self: ContractState, end_time: u64) {        
             assert (self.owner.read() == get_caller_address(), 'Not owner');
             assert (end_time > get_block_timestamp(), 'Invalid Time');
 
             self.auctionState.write(AuctionState::Active(end_time));
         }
 
-        fn get_auction_status(self: @ContractState) -> u64 {                                     // New Function to read auctionState values
+        fn get_auction_status(self: @ContractState) -> u64 {                                     
             match self.auction_state.read() {
                   AuctionState::Active(_) => 'Auction is live',
                   _ => 0,
