@@ -147,7 +147,7 @@ mod Messenger {
             self.whitelist.at(index).read()
         }
 
-        fn set_status (ref self: ContractState, end_time: u64) {        
+        fn set_status(ref self: ContractState, end_time: u64) {        
             assert (self.owner.read() == get_caller_address(), 'Not owner');
             assert (end_time > get_block_timestamp(), 'Invalid Time');
 
