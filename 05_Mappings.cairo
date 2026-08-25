@@ -4,7 +4,7 @@ trait IMessenger<TContractState> {
     fn set_message(ref self: TContractState, input_message: ByteArray);
     fn get_message(self: @TContractState) -> ByteArray;
     fn deposit(ref self: TContractState, amount: u256);                                                //New function Deposit
-                                                      //New Function get_balance
+    fn get_balance(self: @TContractState) -> u256;                                                     //New Function get_balance
 }
 
 #[starknet::contract]
